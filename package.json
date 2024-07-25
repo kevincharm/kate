@@ -1,0 +1,32 @@
+{
+  "name": "@kevincharm/kate",
+  "version": "1.0.0",
+  "description": "KZG vector commitments",
+  "main": "dist/index.js",
+  "files": ["dist/**/*"],
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "yarn@1.22.22",
+  "scripts": {
+    "prepare": "rm -rf dist && yarn tsc && rm -rf dist/test",
+    "test": "NODE_OPTIONS=--experimental-global-webcrypto ./node_modules/.bin/mocha -r ts-node/register test/**/*.spec.ts"
+  },
+  "author": "Kevin Charm <kevin@kevincharm.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/chai": "^4.3.16",
+    "@types/mocha": "^10.0.7",
+    "@types/node": "^18",
+    "chai": "^4",
+    "mocha": "^10.6.0",
+    "prettier": "^3.3.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3"
+  },
+  "dependencies": {
+    "@guildofweavers/galois": "^0.4.22",
+    "@noble/curves": "^1.4.2",
+    "ffjavascript": "0.1.3"
+  }
+}
