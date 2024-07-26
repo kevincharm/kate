@@ -99,7 +99,7 @@ $$
 
 ## Powers of Tau
 
-For each coefficient of any polynomial that we want to commit, we need an unrelated generator for which we don't know the discrete logarithm. For this, we use the $\tau^i \mathbb{G}_1$ and $\tau^i \mathbb{G}_2$ generators from the Perpetual Powers of Tau trusted setup.
+For each coefficient of any polynomial that we want to commit, we need an unrelated generator for which we don't know the discrete logarithm. To achieve this, we use the $\tau^i \mathbb{G}_1$ and $\tau^i \mathbb{G}_2$ generators from the [Perpetual Powers of Tau](https://github.com/privacy-scaling-explorations/perpetualpowersoftau) trusted setup.
 
 ## References
 
