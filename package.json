@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "KZG vector commitments",
   "main": "dist/index.js",
-  "files": ["dist/**/*"],
+  "files": [
+    "dist/**/*"
+  ],
   "engines": {
     "node": ">=18"
   },
@@ -26,7 +28,6 @@
   },
   "dependencies": {
     "@guildofweavers/galois": "^0.4.22",
-    "@noble/curves": "^1.4.2",
     "ffjavascript": "0.1.3"
   }
 }
