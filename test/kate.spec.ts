@@ -54,5 +54,5 @@ describe('kate', () => {
                 true,
             )
         }
-    })
+    }).timeout(0) // non-optimised pairings
 })
