@@ -1,6 +1,23 @@
 # Kate
 
-Implementation of [Kate-Zaverucha-Goldberg commitments](https://www.iacr.org/archive/asiacrypt2010/6477178/6477178.pdf) (aka KZG commitments).
+Implementation of [Kate-Zaverucha-Goldberg commitments](https://www.iacr.org/archive/asiacrypt2010/6477178/6477178.pdf) (aka KZG commitments) over BN254.
+
+## Usage
+
+```ts
+import { commitVec, proveVec, verifyVec, Fr } from '@kevincharm/kate'
+
+const vector = Array.from({ length: 5 }, () => Fr.rand())
+
+// Commitment: C, ω
+const commitment = await commitVec(vector)
+
+// Proof: π
+const { pi } = await proveVec(vector[0], 0n, commitment)
+
+// Verify(C, ω, π, value, index)
+await verifyVec(commitment.C, commitment.root, pi, vector[0], 0n) // === true
+```
 
 ## Vector commitments
 

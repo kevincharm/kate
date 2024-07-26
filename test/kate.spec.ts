@@ -1,8 +1,16 @@
 import { expect } from 'chai'
-import { commitPoly, prove, verify } from '../src/poly'
-import { getTauG1s } from '../src/tau'
-import { Fr, G1 } from '../src/ff'
-import { commitVec, interpolate, proveVec, verifyVec } from '../src/vector'
+import {
+    commitPoly,
+    prove,
+    verify,
+    commitVec,
+    interpolate,
+    proveVec,
+    verifyVec,
+    Fr,
+    G1,
+    getTauG1s,
+} from '../src'
 
 describe('kate', () => {
     it('commits polynomial', async () => {
@@ -34,13 +42,17 @@ describe('kate', () => {
     })
 
     it('commits vector', async () => {
-        const vector = Array.from({ length: 5 }, (_, i) => Fr.rand())
+        const vector = Array.from({ length: 5 }, () => Fr.rand())
 
         // Commit
         const commitment = await commitVec(vector)
 
         // Verify
-        const { pi } = await proveVec(vector[0], 0n, commitment)
-        expect(await verifyVec(commitment.C, commitment.root, pi, vector[0], 0n)).to.eq(true)
+        for (let i = 0; i < vector.length; i++) {
+            const { pi } = await proveVec(vector[i], BigInt(i), commitment)
+            expect(await verifyVec(commitment.C, commitment.root, pi, vector[i], BigInt(i))).to.eq(
+                true,
+            )
+        }
     })
 })
