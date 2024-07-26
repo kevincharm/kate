@@ -26,7 +26,7 @@ export function interpolate(vector: bigint[]) {
     const vectorWithPadding = [...vector, ...Array.from({ length: z }, () => 0n)]
     const ys = Fr.newVectorFrom(vectorWithPadding)
 
-    // Finally,cCompute p(x) via Lagrange interpolation
+    // Finally, compute p(x) via Lagrange interpolation
     const px = Fr.interpolate(xs, ys)
 
     return {
