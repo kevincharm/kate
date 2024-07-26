@@ -18,9 +18,9 @@ $$
 
 Once we have computed the interpolated polynomial $P(x) = p_0 + p_1 \cdot x + p_2 \cdot x^2 + ... + p_{d-1} \cdot x^{d-1}$, we compute a simple vector commitment $C_{\mathbf{v}}$:
 
-$$
+```math
 C_{\mathbf{v}} = [ P(\tau) ]_1 = \left[ \sum_{i=0}^{d-1} p_i \cdot \tau^i \right]_1 = \sum_{i=0}^{d-1} p_i \cdot [\tau^i]_1 = \sum_{i=0}^{d-1} p_i \cdot ( \tau^i \cdot \mathbb{G}_1 )
-$$
+```
 
 where $\tau^i \cdot \mathbb{G}_1$ is the $i$-th power generator from the Powers of Tau trusted setup.
 
@@ -36,12 +36,12 @@ $$
 
 and so
 
-$$
+```math
 \pi
 = [Q(\tau)]_1
 = [ q_0 \cdot \tau + q_1 \cdot \tau^2 + ... + q_{d-1} \cdot \tau^d ]_1
 = \sum_{i=0}^{d-1} q_i \cdot (\tau^i \cdot \mathbb{G}_1)
-$$
+```
 
 ### Verifying membership proof
 
@@ -49,9 +49,9 @@ To verify $v_i \in C_{\mathbf{v}}$, the prover sends $\{ \omega^i, v_i, \pi \}$.
 
 The verifier compares the following pairings and verifies that they are equivalent.
 
-$$
+```math
 e(\pi, [\tau - \omega^i]_2) \stackrel{?}{=} e(C_{\mathbf{v}} - [v_i]_1, h)
-$$
+```
 
 where $h$ is an arbitrary $i$-th power generator (with $i \neq 1$) on the $\mathbb{G}_2$ subgroup from the Powers of Tau CRS.
 
@@ -63,9 +63,9 @@ $$
 
 The pairing check is equivalent to checking that the quotient polynomial $Q(x)$ is correctly formed at $Q(\tau)$ (from [Scroll](https://docs.scroll.io/en/learn/zero-knowledge/kzg-commitment-scheme)):
 
-$$
+```math
 e(\pi, [\tau - \omega^i]_2) = e(C_{\mathbf{v}} - [v_i]_1, h)
-$$
+```
 
 $$
 \iff e([Q(\tau)]_1, [\tau - \omega^i]_2) = e([P(\tau)]_1 - [v_i]_1, h)
