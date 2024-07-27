@@ -1,6 +1,6 @@
 // @ts-ignore
 import * as ffjs from 'ffjavascript'
-import { G1, G2, Fr, PointG1 } from './ff'
+import { G1, Fr, PointG1, F12 } from './ff'
 import { getTauG1s, getTauG2s } from './tau'
 import { Vector } from '@guildofweavers/galois'
 
@@ -63,11 +63,19 @@ export async function verify(C: PointG1, pi: PointG1, a: bigint, b: bigint) {
     const g1 = tauG1s[0] // G1 generator
     const g2 = tauG2s[0] // G2 generator
 
-    const p0 = pi
-    const q0 = G2.sub(tauG2s[1], G2.mulScalar(g2, a))
+    // e((aπ) + (C - [b]_1), H)
+    const p0 = G1.add(
+        G1.mulScalar(G1.affine(pi), a),
+        G1.add(G1.affine(C), G1.neg(G1.mulScalar(g1, b))),
+    )
+    const q0 = g2
     const f0 = ffjs.bn128.pairing(p0, q0)
 
-    const p1 = G1.sub(G1.affine(C), G1.mulScalar(g1, b))
-    const f1 = ffjs.bn128.pairing(p1, g2)
-    return ffjs.bn128.F12.eq(f0, f1)
+    // e(-π, [τ]_2)
+    const p1 = G1.neg(G1.affine(pi))
+    const q1 = tauG2s[1]
+    const f1 = ffjs.bn128.pairing(p1, q1)
+
+    // e((aπ) + (C - [b]_1), H) * e(-π, [τ]_2) = 1
+    return F12.eq(F12.mul(f0, f1), F12.one)
 }

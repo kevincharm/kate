@@ -20,6 +20,7 @@ export const Fr = createPrimeField(
 export type PointG1 = [bigint, bigint, bigint]
 export type PointG2 = [[bigint, bigint], [bigint, bigint], [bigint, bigint]]
 export type Point = PointG1 | PointG2
+
 // https://github.com/iden3/ffjavascript/blob/18cab5b5edbd6d45c70882bd15644506e878e47f/src/ec.js
 export interface G<T extends Point, P = Tagged<T, 'Point'>> {
     add(p: P, q: P): P
@@ -32,5 +33,13 @@ export interface G<T extends Point, P = Tagged<T, 'Point'>> {
     zero: P
     one: P
 }
+
+export interface F {
+    eq(a: F, b: F): boolean
+    mul(a: F, b: F): F
+    one: F
+}
+
 export const G1 = ffjs.bn128.G1 as G<PointG1>
 export const G2 = ffjs.bn128.G2 as G<PointG2>
+export const F12 = ffjs.bn128.F12 as F
